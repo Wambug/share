@@ -18,7 +18,6 @@ fn header() -> Html {
     font-size:50px;
     font-weight:500;
     color: white;
-    text-align:center;
     border-right: 4px solid #000;
     animation: cursor 1s infinite step-end, typing 15s infinite steps(16);
     white-space:nowrap;
@@ -30,11 +29,18 @@ fn header() -> Html {
      }
      @keyframes typing{
      0%{width: 0ch}
-     50%{width:28ch;}
-     80%{width:28ch;}
+     50%{width:26ch;}
+     80%{width:26ch;}
      90%{width:0ch;}
      100%{width:0ch;}
      }
+   .flex-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100vw;
+      height: 20vh;
+      }
     "#
     )
     .expect("Failed to mount style")
@@ -44,10 +50,11 @@ fn header() -> Html {
     <>
         <div class={style} >
         <header>
-        <h1>{"Share."}</h1>
+        <h1>{"Share 🔗."}</h1>
         </header>
+       <div class="flex-container">
         <h2>{"Share is a file sharing web app."}</h2>
-
+        </div>
         </div>
     </>
         }
