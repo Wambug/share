@@ -30,8 +30,8 @@ fn header() -> Html {
      }
      @keyframes typing{
      0%{width: 0ch}
-     50%{width:43ch;}
-     80%{width:43ch;}
+     50%{width:28ch;}
+     80%{width:28ch;}
      90%{width:0ch;}
      100%{width:0ch;}
      }
@@ -46,7 +46,7 @@ fn header() -> Html {
         <header>
         <h1>{"Share."}</h1>
         </header>
-        <h2>{"Share is a simple file sharing web app with a timer."}</h2>
+        <h2>{"Share is a file sharing web app."}</h2>
 
         </div>
     </>
