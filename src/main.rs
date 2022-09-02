@@ -10,9 +10,31 @@ fn header() -> Html {
       font-weight: 600;
       background-image: linear-gradient(to left,#553c9a,#b393d3);
       color: transparent;
+      text-align: center;
       background-clip: text;
       -webkit-background-clip: text;
     }
+    h2 {
+    font-size:50px;
+    font-weight:500;
+    color: white;
+    text-align:center;
+    border-right: 4px solid #000;
+    animation: cursor 1s infinite step-end, typing 15s infinite steps(16);
+    white-space:nowrap;
+    overflow:hidden; 
+    }
+   @keyframes cursor {
+    0%, 100%{border-color:transparent;}
+    50%{border-color:#000;}
+     }
+     @keyframes typing{
+     0%{width: 0ch}
+     50%{width:43ch;}
+     80%{width:43ch;}
+     90%{width:0ch;}
+     100%{width:0ch;}
+     }
     "#
     )
     .expect("Failed to mount style")
@@ -22,8 +44,10 @@ fn header() -> Html {
     <>
         <div class={style} >
         <header>
-        <h1>{"Modern Frontend Monitoring and Product Analytics."}</h1>
+        <h1>{"Share."}</h1>
         </header>
+        <h2>{"Share is a simple file sharing web app with a timer."}</h2>
+
         </div>
     </>
         }
@@ -32,10 +56,10 @@ fn header() -> Html {
 #[function_component(App)]
 fn app() -> Html {
     html! {
-        <>
+        <div>
         <Header />
         <h2> {"Initial Setup trying Wasm in rust!"}</h2>
-        </>
+        </div>
     }
 }
 
