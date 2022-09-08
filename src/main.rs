@@ -1,5 +1,42 @@
+use std::rc::Rc;
 use stylist::style;
 use yew::prelude::*;
+
+#[derive(Debug)]
+struct Upload {
+    filename: Rc<Option<String>>,
+    filetype: Rc<Option<String>>,
+}
+
+pub enum Msg {}
+
+impl Component for Upload {
+    type Message = Msg;
+    type Properties = ();
+
+    fn create(_ctx: &Context<Self>) -> Self {
+        Upload {
+            filename: Rc::new(None),
+            filetype: Rc::new(None),
+        }
+    }
+    fn view(&self, _ctx: &Context<Self>) -> Html {
+        let style = style!(
+            "
+   
+"
+        )
+        .expect("Failed to mount style")
+        .get_class_name()
+        .to_string();
+        html! {
+        <div class={style}>
+        <label>{"Select file"}</label>
+        <input type="file"/>
+        </div>
+        }
+    }
+}
 
 #[function_component(Header)]
 fn header() -> Html {
@@ -8,7 +45,7 @@ fn header() -> Html {
     header h1 {
       font-size: 70px;
       font-weight: 600;
-      background-image: linear-gradient(to left,#553c9a,#b393d3);
+      background-image: linear-gradient(to left,#3E3E3D,#0D0C0D);
       color: transparent;
       text-align: center;
       background-clip: text;
@@ -19,7 +56,7 @@ fn header() -> Html {
     font-weight:500;
     color: white;
     border-right: 4px solid #000;
-    animation: cursor 1s infinite step-end, typing 15s infinite steps(16);
+    animation: cursor 1s infinite step-end, typing 10s infinite steps(16);
     white-space:nowrap;
     overflow:hidden; 
     }
@@ -50,7 +87,7 @@ fn header() -> Html {
     <>
         <div class={style} >
         <header>
-        <h1>{"Share 🔗."}</h1>
+        <h1>{"Share 🔗"}</h1>
         </header>
        <div class="flex-container">
         <h2>{"Share is a file sharing web app."}</h2>
@@ -66,6 +103,7 @@ fn app() -> Html {
         <div>
         <Header />
         <h2> {"Initial Setup trying Wasm in rust!"}</h2>
+       <Upload />
         </div>
     }
 }
