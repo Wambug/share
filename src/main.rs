@@ -1,40 +1,67 @@
-use std::rc::Rc;
+//use files::Room;
+use files::Room;
+use rand::distributions::Alphanumeric;
+use rand::{thread_rng, Rng};
+//use std::rc::Rc;
 use stylist::style;
 use yew::prelude::*;
+mod files;
 
 #[derive(Debug)]
 struct Upload {
-    filename: Rc<Option<String>>,
-    filetype: Rc<Option<String>>,
+    roomid: Room,
+    // filename: Rc<Option<String>>,
+    //filetype: Rc<Option<String>>,
 }
 
-pub enum Msg {}
+enum Msg {
+    Createroom,
+}
 
 impl Component for Upload {
     type Message = Msg;
     type Properties = ();
 
     fn create(_ctx: &Context<Self>) -> Self {
+        let v = Vec::new();
+        let room = Room { id: v };
         Upload {
-            filename: Rc::new(None),
-            filetype: Rc::new(None),
+            //      filename: Rc::new(None),
+            //    filetype: Rc::new(None),
+            roomid: room,
         }
     }
+
+    fn update(&mut self, _ctx: &Context<Self>, msg: Self::Message) -> bool {
+        match msg {
+            Msg::Createroom => {
+                let randid: String = thread_rng()
+                    .sample_iter(&Alphanumeric)
+                    .take(30)
+                    .map(char::from)
+                    .collect();
+                self.roomid.id.push(randid.clone());
+                randid
+            }
+        };
+        true
+    }
+
     fn view(&self, _ctx: &Context<Self>) -> Html {
-        let style = style!(
-            "
-   
-"
-        )
-        .expect("Failed to mount style")
-        .get_class_name()
-        .to_string();
+        let style = style!("")
+            .expect("Failed to mount style")
+            .get_class_name()
+            .to_string();
         html! {
-        <div class={style}>
-        <label>{"Select file"}</label>
-        <input type="file"/>
-        </div>
-        }
+         <div class={style}>
+         <label>{"Select file"}</label>
+          <button onclick={_ctx.link().callback(|_|Msg::Createroom)} >{"create room"}</button>
+        <p>{ for self.roomid.id.iter()} </p>
+        <br/>
+         <br />
+         <input type="file"/>
+         </div>
+         }
     }
 }
 
@@ -103,7 +130,7 @@ fn app() -> Html {
         <div>
         <Header />
         <h2> {"Initial Setup trying Wasm in rust!"}</h2>
-       <Upload />
+        <Upload />
         </div>
     }
 }
