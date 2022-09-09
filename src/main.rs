@@ -40,8 +40,7 @@ impl Component for Upload {
                     .take(30)
                     .map(char::from)
                     .collect();
-                self.roomid.id.push(randid.clone());
-                randid
+                self.roomid.id.push(randid)
             }
         };
         true
@@ -54,10 +53,10 @@ impl Component for Upload {
             .to_string();
         html! {
          <div class={style}>
+        <button onclick={_ctx.link().callback(|_|Msg::Createroom)} >{"create room"}</button>
+          <p>{ for self.roomid.id.iter().last()} </p>
          <label>{"Select file"}</label>
-          <button onclick={_ctx.link().callback(|_|Msg::Createroom)} >{"create room"}</button>
-        <p>{ for self.roomid.id.iter()} </p>
-        <br/>
+          <br/>
          <br />
          <input type="file"/>
          </div>
